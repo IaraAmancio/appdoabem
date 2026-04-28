@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://doabem-api.onrender.com"
+    baseURL: "https://api-orkut-r0e6.onrender.com"
 });
 
 api.interceptors.request.use(
