@@ -4,12 +4,6 @@
 
 Este projeto é uma aplicação full stack com autenticação e CRUD básico.
 
-O sistema é dividido em duas partes:
-
-* **Backend:** API REST
-* **Frontend:** Interface do usuário
-
----
 
 ## 🧰 Stack Utilizada
 
@@ -56,44 +50,45 @@ project/
 
 ### 🔐 Autenticação
 
-* Cadastro de usuário
+* Cadastro de instituição
 * Login
 * Proteção de rotas com token JWT
 
 ### 📦 CRUD Principal
 
-* Criar item
-* Listar itens
-* Atualizar item
-* Deletar item
+* Criar item de solicitação de doação
+* Listar itens 
+
 
 ---
 
 ## 🧠 Fluxo da Aplicação
 
-1. Usuário se cadastra
-2. Faz login
+1. Usuário e Instituição visualiza solicitações de doações
+2. Instituição faz login
 3. Recebe token JWT
-4. Acessa dashboard
+4. Acessa opção de cadastrar solicitação de doações
 5. Realiza operações CRUD
 
 ---
 
 ## 🗄️ Banco de Dados (PostgreSQL)
 
-### Tabela: users
+### Tabela: instituição
 
 * id
 * name
 * email
 * password
 
-### Tabela: items (exemplo CRUD principal)
+### Tabela: solicitação
 
 * id
-* title
-* description
-* created_at
+* instituicao_id
+* item
+* descricao
+* quantidade
+* criado_em
 
 ---
 
@@ -116,8 +111,9 @@ project/
 ## 💻 Frontend - Páginas
 
 * /login
-* /register
-* /dashboard
+* /cadastro
+* /feed
+* /cadastroSolicitacao
 
 ---
 
@@ -134,47 +130,12 @@ axios.delete('/items/:id')
 
 ---
 
-## 🎨 UI
 
-* Tailwind CSS para estilização
-* Layout simples e responsivo
-* Foco em funcionalidade (MVP)
+## 🚀 Deploy 
 
----
-
-## ⚡ Regras do MVP (IMPORTANTE)
-
-Para entrega rápida em 1 dia:
-
-* Apenas 1 CRUD principal
-* Sem features avançadas
-* Sem painel complexo
-* Sem microserviços
-* Sem otimizações extras
-
----
-
-## 🧪 Testes
-
-* Testar API com Postman
-* Testar fluxo completo no frontend
-
-Fluxo obrigatório:
-
-1. Cadastro
-2. Login
-3. Criar item
-4. Listar itens
-5. Editar item
-6. Excluir item
-
----
-
-## 🚀 Deploy (opcional)
-
-* Backend: Render / Railway
+* Backend: Render 
 * Frontend: Vercel
-* Banco: Supabase / Railway PostgreSQL
+* Banco: PostgreSQL
 
 ---
 
@@ -186,17 +147,4 @@ Entregar um sistema funcional com:
 * CRUD funcionando
 * frontend conectado ao backend
 
----
 
-## ⏱️ Estratégia de Desenvolvimento (1 dia)
-
-* 2h planejamento + setup
-* 4h backend
-* 4h frontend
-* 2h testes + ajustes + deploy
-
----
-
-## 👨‍💻 Status do Projeto
-
-MVP pronto para entrega inicial
