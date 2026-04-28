@@ -7,7 +7,7 @@ import s from "./Feed.module.scss";
 export default function Feed() {
   const [solicitacoes, setSolicitacoes] = useState([]);
 
- // const { logout } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // CARREGAR FEED SOLITAÇÕES DE DOAÇÕES
@@ -24,7 +24,10 @@ export default function Feed() {
     carregarFeed()
   },[])
 
-
+ function handleLogout(){
+    logout()
+    navigate("/feed");
+ }
 
   function handleLogin() {
    // logout();          // remove token
@@ -36,22 +39,57 @@ export default function Feed() {
     <header className={s.header}>
         <div className={s.logo}>DoaBem</div>
         <nav className={s.nav}>
-        <button className={s.btn} onClick={()=>handleLogin()}>Instituição</button>
+            {token ? (
+                <div className={s.nav}>
+                    <button className={s.btn} onClick={() => navigate("/cadastroSolicitacao")}>
+                        Solicitar Doação
+                    </button>    
+                    <button className={s.btn} onClick={handleLogout}>
+                        Sair
+                    </button>   
+                </div>
+                
+                ) : (
+                <button className={s.btn} onClick={() => navigate("/login")}>
+                    Instituição
+                </button>
+            )}
         </nav>
     </header>
-    
     <main className={s.content}>
-        {/* Solicitações dos pedidos de doações de Instituições */}
+        <h2 className={s.feedTitle}>Solicitações Recentes</h2>
+        
         {solicitacoes.length === 0 ? (
-            <p className={s.empty}>Nenhuma solicitação de doação ainda...</p>
-          ) : (
-            solicitacoes.map((doacao) => (
-              <section key={doacao.id}>
-                <h1>{doacao.nome}</h1>
-              </section>
-            ))
-          )}
-    </main>
+            <div className={s.emptyContainer}>
+            <p className={s.empty}>Nenhuma solicitação de doação encontrada no momento.</p>
+            </div>
+        ) : (
+            <div className={s.cardsGrid}>
+            {solicitacoes.map((solicitacao) => (
+                <article key={solicitacao.id} className={s.card}>
+                <div className={s.cardHeader}>
+                    <span className={s.statusBadge}>{solicitacao.status}</span>
+                    <h3>{solicitacao.item}</h3>
+                </div>
+
+                <div className={s.cardBody}>
+                    <p className={s.description}>{solicitacao.descricao}</p>
+                    <div className={s.info}>
+                    <strong>Quantidade:</strong> {solicitacao.quantidade}
+                    </div>
+                </div>
+
+                <div className={s.cardFooter}>
+                    <p className={s.institution}>
+                    <span>Instituição:</span> #{solicitacao.instituicao_id}
+                    </p>
+                    <button className={s.helpBtn}>Quero Ajudar</button>
+                </div>
+                </article>
+            ))}
+            </div>
+        )}
+        </main>
     </div>
   );
 }
