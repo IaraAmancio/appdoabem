@@ -1,0 +1,124 @@
+.loginWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh; // Centraliza verticalmente na tela quase toda
+  background-color: #f8faff; // Fundo levemente azulado para suavizar
+  padding: 20px;
+}
+
+.loginCard {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(66, 135, 245, 0.1); // Sombra azulada sutil
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .header {
+    text-align: center;
+
+    .logo {
+      color: #4287f5;
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    span {
+      color: #777;
+      font-size: 14px;
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #555;
+        text-align: left;
+      }
+
+      input {
+        height: 45px;
+        padding: 0 15px;
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: all 0.3s;
+
+        &:focus {
+          outline: none;
+          border-color: #4287f5;
+          box-shadow: 0 0 0 3px rgba(66, 135, 245, 0.1);
+        }
+      }
+    }
+
+    .loginBtn {
+      height: 48px;
+      background-color: #4287f5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: transform 0.2s, background 0.3s;
+
+      &:hover {
+        background-color: #3176e4;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+
+    p {
+      font-size: 14px;
+      color: #666;
+
+      button {
+        background: none;
+        border: none;
+        color: #4287f5;
+        font-weight: 700;
+        cursor: pointer;
+        margin-left: 5px;
+        padding: 0;
+        text-decoration: underline;
+
+        &:hover {
+          color: #215bb8;
+        }
+      }
+    }
+  }
+}
