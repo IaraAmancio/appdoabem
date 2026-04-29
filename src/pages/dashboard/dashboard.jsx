@@ -2,9 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { redirect, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import s from "./Feed.module.scss";
+import s from "./Dashboard.module.scss";
 
-export default function Feed() {
+export default function Dashboard() {
   const [solicitacoes, setSolicitacoes] = useState([]);
 
   const { token, logout } = useContext(AuthContext);
@@ -14,8 +14,13 @@ export default function Feed() {
   useEffect(()=>{
     async function carregarFeed(){
       try{
-        const res = await api.get("/feed")
-        setSolicitacoes(res.data)
+        const res = await api.get("/minhas-solicitacoes", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+        });
+
+        setSolicitacoes(res.data);
       }catch(erro){
         console.log(erro)
         console.log("Erro ao carregar feed!")
@@ -37,7 +42,7 @@ export default function Feed() {
   return (
     <div className={s.feedContainer}>
     <header className={s.header}>
-        <div className={s.logo}>DoaBem</div>
+        <a href="/feed" className={s.logo}>DoaBem</a>
         <nav className={s.nav}>
             {token ? (
                 <div className={s.nav}>
@@ -60,7 +65,7 @@ export default function Feed() {
         </nav>
     </header>
     <main className={s.content}>
-        <h2 className={s.feedTitle}>Solicitações Recentes</h2>
+        <h2 className={s.feedTitle}>Dashboard</h2>
         
         {solicitacoes.length === 0 ? (
             <div className={s.emptyContainer}>
@@ -71,6 +76,7 @@ export default function Feed() {
             {solicitacoes.map((solicitacao) => (
                 <article key={solicitacao.id} className={s.card}>
                 <div className={s.cardHeader}>
+                    <span className={s.statusBadge}>{solicitacao.status}</span>
                     <h3>{solicitacao.item}</h3>
                 </div>
 
@@ -85,15 +91,23 @@ export default function Feed() {
                     <p className={s.institution}>
                     <span>Instituição:</span> {solicitacao.instituicao_nome}
                     </p>
-                    <button
-                        className={s.helpBtn}
-                        onClick={() => {
-                           
-                            window.open(`https://wa.me/55${solicitacao.instituicao_telefone}`, '_blank');
-                        }}
-                        >
-                        Quero Ajudar
-                    </button>
+                    <div className={s.row}>
+                        <button
+                            className={s.completedBtn}
+                            onClick={() => {
+                            
+                            }}
+                            >
+                            Recebido
+                        </button>
+                        <button
+                            className={s.editBtn}
+                            onClick={() => {
+                                                        }}
+                            >
+                            Editar
+                        </button>
+                    </div>
                 </div>
                 </article>
             ))}
