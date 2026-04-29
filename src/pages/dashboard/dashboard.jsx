@@ -39,6 +39,27 @@ export default function Dashboard() {
     navigate("/login"); // redireciona
   }
 
+    async function deletarSolicitacao_(id) {
+        const token = localStorage.getItem("token");
+
+        try {
+            await api.delete(`/solicitacoes/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+            });
+
+            alert("Solicitação excluída!");
+
+            setSolicitacoes((prev) => prev.filter((item) => item.id !== id));
+
+        } catch (erro) {
+            console.log(erro.response.data);
+            alert("Erro ao excluir solicitação");
+        }
+    }
+  
+
   return (
     <div className={s.feedContainer}>
     <header className={s.header}>
@@ -101,11 +122,9 @@ export default function Dashboard() {
                             Recebido
                         </button>
                         <button
-                            className={s.editBtn}
-                            onClick={() => {
-                                                        }}
-                            >
-                            Editar
+                            className={s.removeBtn}
+                            onClick={() => deletarSolicitacao_(solicitacao.id)}>
+                            Excluir
                         </button>
                     </div>
                 </div>
