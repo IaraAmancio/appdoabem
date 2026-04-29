@@ -14,18 +14,27 @@ export default function CadastroSolicitacao() {
     e.preventDefault();
     try {
       // 
-      await api.post("/solicitacoes", { 
-        instituicao_id: 3,
-        quantidade,
-        item,
-        descricao: descricaoItem
-      });
-      alert("Solicitação cadastrada com sucesso!");
-      navigate("/feed");
-    } catch (error) {
-      console.log(error.message);
-      alert("Erro ao cadastrar solicitação.");
-    }
+      const token = localStorage.getItem("token");
+
+      await api.post(
+        "/solicitacoes",
+        {
+          quantidade,
+          item,
+          descricao: descricaoItem
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+        alert("Solicitação cadastrada com sucesso!");
+        navigate("/feed");
+      } catch (error) {
+        console.log(error.response.data);
+        alert("Erro ao cadastrar solicitação.");
+      }
   }
 
   return (

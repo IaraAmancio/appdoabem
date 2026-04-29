@@ -87,7 +87,7 @@ export default function Feed() {
                         className={s.helpBtn}
                         onClick={() => {
                            
-                            window.open(`https://wa.me/5588999966424`, '_blank');
+                            window.open(`https://wa.me/55${solicitacao.instituicao_telefone}`, '_blank');
                         }}
                         >
                         Quero Ajudar
