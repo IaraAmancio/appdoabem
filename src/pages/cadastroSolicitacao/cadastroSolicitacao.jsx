@@ -15,7 +15,7 @@ export default function CadastroSolicitacao() {
     try {
       // 
       await api.post("/solicitacoes", { 
-        instituicao_id: 1,
+        instituicao_id: 3,
         quantidade,
         item,
         descricao: descricaoItem

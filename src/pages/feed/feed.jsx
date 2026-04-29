@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import s from "./Feed.module.scss";
 
@@ -81,9 +81,17 @@ export default function Feed() {
 
                 <div className={s.cardFooter}>
                     <p className={s.institution}>
-                    <span>Instituição:</span> #{solicitacao.instituicao_id}
+                    <span>Instituição:</span> {solicitacao.instituicao_nome}
                     </p>
-                    <button className={s.helpBtn}>Quero Ajudar</button>
+                    <button
+                        className={s.helpBtn}
+                        onClick={() => {
+                           
+                            window.open(`https://wa.me/5588999966424`, '_blank');
+                        }}
+                        >
+                        Quero Ajudar
+                    </button>
                 </div>
                 </article>
             ))}
